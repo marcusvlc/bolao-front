@@ -1,27 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="main-container">
+    <SideBannerComponent></SideBannerComponent>
+    <RegisterComponent></RegisterComponent>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-});
+<script setup lang="ts">
+import RegisterComponent from "./components/Register/RegisterComponent.vue";
+import SideBannerComponent from "./components/SideBanner/SideBannerComponent.vue";
 </script>
 
-<style lang="scss">
+<style>
+@font-face {
+  font-family: "Aceh-Light";
+  src: local("Aceh-Light"),
+    url(./assets/fonts/Aceh-Light.ttf) format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: "Aceh-Light";
+}
+.main-container {
+  height: 100%;
+  display: flex;
 }
 </style>
