@@ -12,7 +12,7 @@
           <span class="field-label">Nome Completo</span>
           <input
             v-model="name"
-            class="input-form"
+            class="input-form text-input"
             type="text"
             required
             placeholder="Seu nome"
@@ -20,10 +20,21 @@
         </div>
 
         <div class="field">
+          <span class="field-label">Nome de usuário</span>
+          <input
+            v-model="username"
+            class="input-form text-input"
+            type="text"
+            required
+            placeholder="Escolha um nome de usuário"
+          />
+        </div>
+
+        <div class="field">
           <span class="field-label">E-mail</span>
           <input
             v-model="email"
-            class="input-form"
+            class="input-form text-input"
             type="email"
             required
             placeholder="Seu e-mail"
@@ -32,13 +43,7 @@
 
         <div class="field">
           <span class="field-label">Senha</span>
-          <input
-            v-model="password"
-            class="input-form"
-            type="text"
-            required
-            placeholder="Digite uma senha"
-          />
+          <PasswordInputComponent @password-change="onPasswordChange" />
         </div>
 
         <button
@@ -64,10 +69,17 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import PasswordInputComponent from "../PasswordInput/PasswordInputComponent.vue";
+
 const bShowSpinner = ref(false);
 const name = ref("");
+const username = ref("");
 const email = ref("");
 const password = ref("");
+
+function onPasswordChange(value: string) {
+  password.value = value;
+}
 
 function onRegister(event: Event) {
   event.preventDefault();
@@ -126,16 +138,8 @@ function onRegister(event: Event) {
       margin-bottom: 30px;
       .input-form {
         width: 100%;
-        height: 50px;
-        border: none;
-        box-shadow: 0 0 5pt 0.5pt #d3d3d3;
-        text-indent: 10px;
-        margin-top: 10px;
 
-        &:focus {
-          outline: none;
-          border: 1px solid #2666fa;
-        }
+        margin-top: 10px;
       }
 
       &-label {
