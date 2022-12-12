@@ -9,8 +9,10 @@
 <script setup lang="ts"></script>
 
 <style lang="scss">
+@import "../../styles/variables";
+
 .banner {
-  background-color: #2666fa;
+  background-color: $primary-blue;
   width: 50%;
   display: flex;
   flex-direction: column;

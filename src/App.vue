@@ -1,14 +1,10 @@
 <template>
   <div class="main-container">
-    <SideBannerComponent></SideBannerComponent>
-    <RegisterComponent></RegisterComponent>
+    <RouterView></RouterView>
   </div>
 </template>
 
-<script setup lang="ts">
-import RegisterComponent from "./components/Register/RegisterComponent.vue";
-import SideBannerComponent from "./components/SideBanner/SideBannerComponent.vue";
-</script>
+<script setup lang="ts"></script>
 
 <style>
 @font-face {

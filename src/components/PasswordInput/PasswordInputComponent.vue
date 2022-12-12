@@ -3,8 +3,9 @@
     <input
       v-model="password"
       @input="onPasswordChange"
-      class="input-form text-input"
+      class="input-form text-input rounded"
       :type="passwordType"
+      placeholder="Digite sua senha"
       required
     />
     <i @click="togglePasswordView" class="far" :class="[eyeClass]"></i>
@@ -31,8 +32,12 @@ function togglePasswordView() {
     eyeClass.value === EyeEnum.EYE ? InputType.PASSWORD : InputType.TEXT;
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+@import "../../styles/global";
 .password-input {
+  .input-form {
+    width: 100%;
+  }
   .fa-eye,
   .fa-eye-slash {
     float: right;

@@ -1,5 +1,7 @@
+@import './variables';
+
 .btn-blue {
-    background-color: #2666fa;
+    background-color: $primary-blue;
     color: white;
     border: none;
     border-radius: 4px;
@@ -8,7 +10,7 @@
     cursor: pointer;
 
     &:hover {
-        background-color: #2057d6;
+        background-color: $secondary-blue;
       }
 
       &:disabled {
@@ -23,9 +25,10 @@
   border: none;
   box-shadow: 0 0 5pt 0.5pt #d3d3d3;
   text-indent: 10px;
+  
 
   &:focus {
     outline: none;
-    border: 1px solid #2666fa;
+    border: 1px solid $primary-blue;
   }
 }

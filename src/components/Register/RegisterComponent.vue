@@ -2,7 +2,7 @@
   <div class="register-container">
     <div class="login-container">
       <span class="login-title">Já possui uma conta?</span>
-      <button class="btn-blue login-btn">Entrar</button>
+      <button @click="goToLogin" class="btn-blue login-btn">Entrar</button>
     </div>
     <div class="form-container">
       <span class="create-title">Crie sua conta gratuitamente</span>
@@ -12,7 +12,7 @@
           <span class="field-label">Nome Completo</span>
           <input
             v-model="name"
-            class="input-form text-input"
+            class="input-form text-input rounded"
             type="text"
             required
             placeholder="Seu nome"
@@ -23,7 +23,7 @@
           <span class="field-label">Nome de usuário</span>
           <input
             v-model="username"
-            class="input-form text-input"
+            class="input-form text-input rounded"
             type="text"
             required
             placeholder="Escolha um nome de usuário"
@@ -34,7 +34,7 @@
           <span class="field-label">E-mail</span>
           <input
             v-model="email"
-            class="input-form text-input"
+            class="input-form text-input rounded"
             type="email"
             required
             placeholder="Seu e-mail"
@@ -70,6 +70,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import PasswordInputComponent from "../PasswordInput/PasswordInputComponent.vue";
+import RouterManager from "../../routes";
+import { Routes } from "../../enums/RouteEnum";
 
 const bShowSpinner = ref(false);
 const name = ref("");
@@ -85,9 +87,12 @@ function onRegister(event: Event) {
   event.preventDefault();
   bShowSpinner.value = true;
 }
+function goToLogin() {
+  RouterManager.goToRoute(Routes.LOGIN);
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../styles/global";
 
 .register-container {
