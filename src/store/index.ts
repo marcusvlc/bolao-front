@@ -8,24 +8,20 @@ const store = createStore<StoreProps>({
   state() {
     return {
       user: {},
-      token: null,
     };
   },
   mutations: {
     storeUser(state, user) {
       state.user = user;
     },
-    storeToken(state, authToken: string) {
-      state.token = authToken;
-    },
   },
   getters: {},
   actions: {
     makeAuth(context, { username, password }) {
       return LoginService.makeLogin(username, password).then((payload) => {
-        const { token, user } = payload.data;
-        context.commit("storeToken", token);
+        const { user, token } = payload.data;
         context.commit("storeUser", user);
+        LoginService.storeTokenOnLocalStorage(token);
         routes.goToRoute(Routes.BASE);
       });
     },
@@ -35,8 +31,7 @@ const store = createStore<StoreProps>({
 export const key: InjectionKey<Store<StoreProps>> = Symbol();
 
 interface StoreProps {
-  user: any;
-  token: null | string;
+  user: any; // todo type
 }
 
 export default store;

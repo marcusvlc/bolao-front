@@ -3,15 +3,42 @@ import RegisterPageComponent from "./components/RegisterPage/RegisterPageCompone
 import HomePageComponent from "./components/HomePage/HomePageComponent.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import { Routes } from "./enums/RouteEnum";
+import LoginService from "./services/LoginService";
 
 class RouterManager {
   private routes = [
-    { path: Routes.BASE, component: HomePageComponent },
+    {
+      path: Routes.BASE,
+      component: HomePageComponent,
+      meta: { requiresAuth: true },
+    },
     { path: Routes.LOGIN, component: LoginPageComponent },
-    { path: Routes.REGISTER, component: RegisterPageComponent },
+    {
+      path: Routes.REGISTER,
+      component: RegisterPageComponent,
+    },
   ];
 
-  router = createRouter({ history: createWebHistory(), routes: this.routes });
+  public router = createRouter({
+    history: createWebHistory(),
+    routes: this.routes,
+  });
+
+  constructor() {
+    this.setupMiddleware();
+  }
+
+  setupMiddleware() {
+    this.router.beforeEach(async (to, _from, next) => {
+      const isAuthenticated = await LoginService.isAuthenticated();
+      if (to.meta.requiresAuth && !isAuthenticated) {
+        next(Routes.LOGIN);
+        return;
+      }
+
+      next();
+    });
+  }
 
   goToRoute(strRoute: Routes) {
     this.router.push(strRoute);
